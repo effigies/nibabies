@@ -9,9 +9,9 @@ from nipype.interfaces import utility as niu
 def init_coregistration_wf(
     *,
     bspline_fitting_distance=200,
-    mem_gb=3.0,
+    mem_gb=8.0,
     name="coregistration_wf",
-    omp_nthreads=None,
+    omp_nthreads=1,
     sloppy=False,
     debug=False,
 ):

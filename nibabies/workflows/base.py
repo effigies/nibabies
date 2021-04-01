@@ -8,8 +8,8 @@ NiBabies base processing workflows
 .. autofunction:: init_single_subject_wf
 
 """
+from .. import config
 
-from nibabies.utils.bids import group_bolds_ref
 import sys
 import os
 from copy import deepcopy
@@ -17,9 +17,9 @@ from copy import deepcopy
 from nipype.pipeline import engine as pe
 from nipype.interfaces import utility as niu
 
-from .. import config
 from ..interfaces import DerivativesDataSink
 from ..interfaces.reports import SubjectSummary, AboutSummary
+from ..utils.bids import group_bolds_ref
 from .bold import init_func_preproc_wf
 
 
@@ -481,7 +481,8 @@ tasks and sessions), the following preprocessing was performed.
     from sdcflows import fieldmaps as fm
 
     fmap_wf = init_fmap_preproc_wf(
-        debug=bool(config.execution.debug),  # TODO: Add debug option for fieldmaps
+        debug='fieldmaps' in config.execution.debug,
+        sloppy=config.execution.sloppy,
         estimators=fmap_estimators,
         omp_nthreads=config.nipype.omp_nthreads,
         output_dir=nibabies_dir,
