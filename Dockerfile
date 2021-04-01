@@ -212,7 +212,7 @@ WORKDIR /src/nibabies
 # fetch the necessary templateflow files
 RUN python scripts/fetch_templates.py
 
-RUN pip install --no-cache-dir -e .[all] && \
+RUN pip install --no-cache-dir --upgrade --force -e .[all] && \
     rm -rf $HOME/.cache/pip
 
 COPY docker/files/nipype.cfg /home/nibabies/.nipype/nipype.cfg
